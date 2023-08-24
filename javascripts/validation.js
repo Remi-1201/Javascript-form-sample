@@ -1,12 +1,14 @@
-function confirmSubmit() {
-  const forms = document.forms;
-  forms[0].onsubmit = function(){
-    const name = forms[0].name.value;
-    if (!(confirm(`${name}さん、本当に送信しますか？`))) {
-      alert("キャンセルされました");
-      return false;
+function emailValidation() {
+  const form = document.getElementById("form");  //--1
+  form.onsubmit = function() { //--2
+    if(form.email.value !== form.email_confirm.value) { //--3
+      const element = document.createElement("p") //--4
+      const message = document.createTextNode("Eメールが一致しません") //--5
+      element.appendChild(message); //--6
+      form.appendChild(element); //--7
+      return false;  //--8
     }
   };
 };
 
-window.onload = confirmSubmit;
+window.onload = emailValidation;
